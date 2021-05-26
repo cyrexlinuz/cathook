@@ -55,6 +55,7 @@ static void vote_rage_back()
     if (targets.empty())
         return;
     
+    auto &pl = playerlist::AccessData(info.friendsID);
     if (pl.state != playerlist::k_EState::CAT)
         return;
     
