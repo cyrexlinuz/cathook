@@ -35,6 +35,10 @@ bool shouldTargetSteamId(unsigned id)
 	    return false;
     	}
 	
+	if (pl.state == playerlist::k_EState::IPC) {
+	    return false;
+    	}
+	
     return true;
 }
 
