@@ -27,15 +27,14 @@ static CatCommand forgive_all("pt_forgive_all", "Clear betrayal list", []() { be
 
 bool shouldTargetSteamId(unsigned id)
 {
-    if (betrayal_limit)
-    {
-        if (betrayal_list[id] > (unsigned) *betrayal_limit)
-            return true;
-    }
-
+    // We don't need betrayal thing - Human players can freely kill us.
+	
     auto &pl = playerlist::AccessData(id);
-    if (playerlist::IsFriendly(pl.state) || (pl.state == playerlist::k_EState::CAT && *ignoreCathook))
-        return false;
+	
+	if (pl.state != playerlist::k_EState::CAT) {
+	    return false;
+    	}
+	
     return true;
 }
 
@@ -52,7 +51,9 @@ bool shouldTarget(CachedEntity *entity)
         // Don't shoot players in truce
         if (isTruce())
             return false;
-        return shouldTargetSteamId(entity->player_info.friendsID);
+        if (!shouldTargetSteamId(entity->player_info.friendsID))
+	    return false;
+	return true;
     }
     else if (entity->m_Type() == ENTITY_BUILDING)
         // Don't shoot buildings in truce
