@@ -46,25 +46,14 @@ bool shouldTarget(CachedEntity *entity)
 {
     if (entity->m_Type() == ENTITY_PLAYER)
     {
-        if (hoovy && IsHoovy(entity))
-            return false;
-        if (taunting && HasCondition<TFCond_Taunting>(entity) && CE_INT(entity, netvar.m_iTauntIndex) == 3)
-            return false;
-        if (HasCondition<TFCond_HalloweenGhostMode>(entity))
-            return false;
-        // Don't shoot players in truce
-        if (isTruce())
-            return false;
         if (!shouldTargetSteamId(entity->player_info.friendsID))
 	    return false;
 	return true;
     }
     else if (entity->m_Type() == ENTITY_BUILDING)
-        // Don't shoot buildings in truce
-        if (isTruce())
-            return false;
-
-    return true;
+        
+	// Don't shoot buildings at all
+    return false;
 }
 bool shouldAlwaysRenderEspSteamId(unsigned id)
 {
