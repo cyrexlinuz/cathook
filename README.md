@@ -32,8 +32,15 @@ and a lot of useful features, including
 [FULL LIST OF FEATURES HERE](https://cathook.club/wikis/Feature-List-and-explanations)
 
 # Installing, updating, attaching (injecting)
+Cathook is tested on Ubuntu, Manjaro and Arch. It's guaranteed that, Cathook will work on these distros.
 
-[View our short guide to installing and using cathook](https://cathook.club/wikis/Installing,-Attaching-And-General-Infos)
+You first need to get "git" 
+On Ubuntu, you can basically run:
+sudo apt-get install git -y
+
+git clone https://github.com/cyrexlinuz/cathook
+cd cathook
+scripts/developer
 
 ## Reporting Issues
 
