@@ -3,6 +3,8 @@
  *
  *  Created on: Dec 31, 2017
  *      Author: nullifiedcat
+ *
+ * Last edit by Cyrexlinuz
  */
 
 #include "common.hpp"
@@ -112,8 +114,12 @@ void dispatchUserMessage(bf_read &buffer, int type)
 
             auto &pl             = AccessData(info.friendsID);
             auto &pl_caller      = AccessData(info2.friendsID);
-            bool friendly_kicked = pl.state != k_EState::RAGE && pl.state != k_EState::DEFAULT;
-            bool friendly_caller = pl_caller.state != k_EState::RAGE && pl_caller.state != k_EState::DEFAULT;
+            
+            // Vote YES if a DEFAULT player (humans) is trying to kick someone
+            // Vote NO if a CAT player (cheaters/bots) is trying to kick someone
+            
+            bool friendly_kicked = pl.state != k_EState::CAT;
+            bool friendly_caller = pl_caller.state != k_EState::CAT;
 
             if (*vote_kickn && friendly_kicked)
             {
