@@ -39,11 +39,15 @@ On Ubuntu, you can basically run:
 sudo apt-get install git -y
 
 git clone https://github.com/cyrexlinuz/cathook
+
 cd cathook
+
 scripts/developer (First y and then n)
+
 ./install-all (If it asks for auto updater, you can set it to No for now)
 
 When installation completes, you can start the TF2 first and then run:
+
 sudo ./attach
 
 It should start working
