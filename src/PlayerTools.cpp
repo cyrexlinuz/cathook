@@ -1,5 +1,8 @@
 /*
   Created on 23.06.18.
+*
+* From Cyrexlinuz's fork of Cathook
+*
 */
 
 #include "common.hpp"
