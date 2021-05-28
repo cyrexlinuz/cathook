@@ -1,10 +1,6 @@
-# Cathook Training Software
+# Cathook Bot Hunting Software
 ![banner](http://i.imgur.com/w96wdtE.png)
 [![CircleCI](https://circleci.com/gh/nullworks/cathook.svg?style=svg)](https://circleci.com/gh/nullworks/cathook)
-
-## Moving back to GitHub
-
-GitHub has restored our repo and we have decided to move everything back to GitHub. The update process will be automatic.
 
 ## Risk of VAC detection
 
@@ -12,9 +8,9 @@ The software could be detected by VAC in the future. Only use it on accounts you
 
 ## Overview
 
-Cathook is a training software designed for Team Fortress 2 for Linux. Cathook includes some joke features like
+Cathook is a bot hunting software designed for Team Fortress 2 for Linux. Cathook includes some joke features like
 
-* Ignore Hoovy
+* Only aimbot other cathook users
 * Encrypted chat
 * Nullnexus Support (Find other Cathook users in-game automatically)
 * Sandvich aimbot
@@ -37,10 +33,6 @@ and a lot of useful features, including
 # Installing, updating, attaching (injecting)
 
 [View our short guide to installing and using cathook](https://cathook.club/wikis/Installing,-Attaching-And-General-Infos)
-
-## Community
-You can chat with other cathook users in [our official Telegram group](https://t.me/nullworks) and the [cathook announcements channel](https://t.me/cathook_cheat).
-If you don't have Telegram, you can chat with other cathook users in our official Matrix room, however, you will have to ask TotallyNotElite or BenCat07 for an invite to said room.
 
 ## Reporting Issues
 
