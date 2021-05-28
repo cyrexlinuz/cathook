@@ -4,7 +4,7 @@
  *  Created on: Dec 31, 2017
  *      Author: nullifiedcat
  *
- * Last edit by Cyrexlinuz
+ * From Cyrexlinuz's fork of Cathook
  */
 
 #include "common.hpp"
