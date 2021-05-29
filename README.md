@@ -31,6 +31,11 @@ and a lot of useful features, including
 
 [FULL LIST OF FEATURES HERE](https://cathook.club/wikis/Feature-List-and-explanations)
 
+## Hosting anti-bot bots
+
+You can host multiple antibot-bots on your computer or server just like all other bots
+Visit [the catbot repo](https://github.com/cyrexlinuz/catbot-setup) for more information.
+
 # Installing, updating, attaching (injecting)
 Cathook is tested on Ubuntu, Manjaro and Arch. It's guaranteed that, Cathook will work on these distros.
 
