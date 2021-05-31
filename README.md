@@ -13,6 +13,8 @@ Cathook is a bot hunting software designed for Team Fortress 2 for Linux. Cathoo
 * Only aimbot other cathook users
 * Vote NO if a cheater is trying to kick a human player
 * Vote YES to votes created by human players
+* Auto abandon game if someone calls a votekick on you
+* Log the Steam ID's of other Cathook users for educational purposes
 * Encrypted chat
 * Nullnexus Support (Find other Cathook users in-game automatically)
 * Chance to get manually VAC banned by Valve (I mean, we still run Cathook!)
