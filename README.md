@@ -17,7 +17,7 @@ Cathook is a bot hunting software designed for Team Fortress 2 for Linux. Cathoo
 * Log the Steam ID's of other Cathook users for educational purposes
 * Encrypted chat
 * Nullnexus Support (Find other Cathook users in-game automatically)
-* Chance to get manually VAC banned by Valve (I mean, we still run Cathook!)
+* Chance to get manually VAC banned by Valve
 
 and a lot of useful features, including
 
