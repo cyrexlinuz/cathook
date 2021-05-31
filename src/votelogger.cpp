@@ -141,6 +141,11 @@ void dispatchUserMessage(bf_read &buffer, int type)
             if (chat_partysay)
                 re::CTFPartyClient::GTFPartyClient()->SendPartyChat(formated_string);
         }
+        if (was_local_player) {
+			
+			// Abandon if someone calls a votekick no matter it passes or not.
+			tfmm::disconnectAndAbandon();
+		}
 #if ENABLE_VISUALS
         if (chat)
             PrintChat("Votekick called: \x07%06X%s\x01 => \x07%06X%s\x01 (%s)", colors::chat::team(g_pPlayerResource->getTeam(caller)), info2.name, colors::chat::team(g_pPlayerResource->getTeam(target)), info.name, reason);
