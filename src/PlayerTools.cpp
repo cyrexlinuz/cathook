@@ -34,6 +34,10 @@ bool shouldTargetSteamId(unsigned id)
 	
     auto &pl = playerlist::AccessData(id);
 	
+	if (pl.state == playerlist::k_EState::FRIEND) {
+		return false;
+	}
+	
 	if (pl.state != playerlist::k_EState::CAT) {
 	    return false;
     	}
