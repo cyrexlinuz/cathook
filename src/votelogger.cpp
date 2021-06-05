@@ -141,7 +141,7 @@ void dispatchUserMessage(bf_read &buffer, int type)
             if (chat_partysay)
                 re::CTFPartyClient::GTFPartyClient()->SendPartyChat(formated_string);
         }
-        if (was_local_player) {
+        if (was_local_player && friendly_caller) {
 			
 			// Abandon if someone calls a votekick no matter it passes or not.
 			tfmm::disconnectAndAbandon();
