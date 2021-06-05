@@ -125,8 +125,8 @@ void dispatchUserMessage(bf_read &buffer, int type)
             {
                 vote_command = { "vote option2", 1000u + (rand() % 5000) };
                 vote_command.timer.update();
-                if (*vote_rage_vote && !friendly_caller)
-                    pl_caller.state = k_EState::RAGE;
+                if (*vote_rage_vote && !friendly_caller) {}
+                    //pl_caller.state = k_EState::RAGE; No rage
             }
             else if (*vote_kicky && !friendly_kicked)
             {
@@ -141,11 +141,17 @@ void dispatchUserMessage(bf_read &buffer, int type)
             if (chat_partysay)
                 re::CTFPartyClient::GTFPartyClient()->SendPartyChat(formated_string);
         }
-        if (was_local_player && friendly_caller) {
-			
+        if (was_local_player) {
+		using namespace playerlist;
+		// Only abandon if the person trying to kick us isn't a bot/cheater
+            	auto &pl_caller      = AccessData(info2.friendsID);
+            	bool friendly_caller = pl_caller.state != k_EState::CAT;
+		
+		if(friendly_caller) {
 			// Abandon if someone calls a votekick no matter it passes or not.
 			tfmm::disconnectAndAbandon();
 		}
+	}
 #if ENABLE_VISUALS
         if (chat)
             PrintChat("Votekick called: \x07%06X%s\x01 => \x07%06X%s\x01 (%s)", colors::chat::team(g_pPlayerResource->getTeam(caller)), info2.name, colors::chat::team(g_pPlayerResource->getTeam(target)), info.name, reason);
