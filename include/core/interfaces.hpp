@@ -20,6 +20,7 @@ class ILocalize;
 
 class IToolFrameworkInternal;
 class ISteamClient;
+class ISteamNetworkingSockets;
 class ISteamFriends;
 class IVEngineClient013;
 class IClientEntityList;
@@ -62,6 +63,7 @@ extern TFGCClientSystem *g_TFGCClientSystem;
 extern CHud *g_CHUD;
 extern ISteamClient *g_ISteamClient;
 extern ISteamFriends *g_ISteamFriends;
+extern ISteamNetworkingSockets *g_ISteamNetworkingSockets;
 extern IVEngineClient013 *g_IEngine;
 extern void *demoplayer;
 extern IEngineSound *g_ISoundEngine;

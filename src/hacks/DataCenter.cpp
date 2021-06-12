@@ -32,7 +32,7 @@ static settings::Boolean enable_africa{ "dc.toggle-africa", "false" };
 
 typedef std::array<char, 5> CidStr_t;
 
-struct SteamNetworkingPOPID
+struct SteamNetworkingPOPID_decl
 {
     unsigned v;
     /* 'out' must point to array with capacity at least 5 */
@@ -95,7 +95,7 @@ static std::vector<std::string> africa_datacenters        = { { "jnb" } };
 
 static CatCommand print("dc_print", "Print codes of all available data centers", []() {
     static auto GetPOPCount = *(int (**)(void *))(*(uintptr_t *) g_ISteamNetworkingUtils + 37);
-    static auto GetPOPList  = *(int (**)(void *, SteamNetworkingPOPID *, int))(*(uintptr_t *) g_ISteamNetworkingUtils + 41);
+    static auto GetPOPList  = *(int (**)(void *, SteamNetworkingPOPID_decl *, int))(*(uintptr_t *) g_ISteamNetworkingUtils + 41);
 
     char region[5];
 
@@ -105,7 +105,7 @@ static CatCommand print("dc_print", "Print codes of all available data centers",
         g_ICvar->ConsoleColorPrintf(MENU_COLOR, "List of regions is not available yet\n");
         return;
     }
-    SteamNetworkingPOPID *list = new SteamNetworkingPOPID[count];
+    SteamNetworkingPOPID_decl *list = new SteamNetworkingPOPID_decl[count];
     GetPOPList(g_ISteamNetworkingUtils, list, count);
 
     auto it = list;
@@ -156,8 +156,8 @@ static void OnRegionsUpdate(std::string regions)
         Refresh();
 }
 
-static int (*o_GetDirectPingToPOP)(void *self, SteamNetworkingPOPID cid);
-static int h_GetDirectPingToPOP(void *self, SteamNetworkingPOPID cid)
+static int (*o_GetDirectPingToPOP)(void *self, SteamNetworkingPOPID_decl cid);
+static int h_GetDirectPingToPOP(void *self, SteamNetworkingPOPID_decl cid)
 {
     CidStr_t cidStr;
 
