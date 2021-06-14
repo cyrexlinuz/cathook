@@ -54,6 +54,9 @@ bool shouldTarget(CachedEntity *entity)
 	return true;
     }
     else if (entity->m_Type() == ENTITY_BUILDING)
+    {
+	    return false;
+    }
         
 	// Don't shoot buildings at all
     return false;
