@@ -881,6 +881,7 @@ void CreateMove2()
 }
 
 static InitRoutine init_bulletnospread([]() {
+    return; // TEMPORARY FIX
     // Get our detour hooks running
     static auto writeusercmd_addr = gSignatures.GetClientSignature("55 89 E5 57 56 53 83 EC 2C 8B 45 ? 8B 7D ? 8B 5D ? 89 45 ? 8B 40");
     cl_writeusercmd_detour.Init(writeusercmd_addr, (void *) WriteUserCmd_hook);
