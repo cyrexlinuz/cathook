@@ -134,6 +134,8 @@ void onShutdown()
 static CatCommand get_steamid("print_steamid", "Prints your SteamID", []() { g_ICvar->ConsoleColorPrintf(MENU_COLOR, "%u\n", g_ISteamUser->GetSteamID().GetAccountID()); });
 
 static InitRoutine init([]() {
+    
+    return; // TEMPORARY FIX
     EC::Register(EC::CreateMove, update, "cm_autojoin", EC::average);
     EC::Register(EC::Paint, updateSearch, "paint_autojoin", EC::average);
     static BytePatch p{ gSignatures.GetClientSignature, "55 89 E5 53 83 EC 14 8B 45 08 8B 40 30", 0x00, { 0x31, 0xC0, 0x40, 0xC3 } };
