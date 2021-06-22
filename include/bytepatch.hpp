@@ -78,7 +78,7 @@ public:
     }
     void Shutdown()
     {
-        if (patched)
+        if (patched && false)
         {
             void *page          = (void *) ((uint64_t) addr & ~0xFFF);
             void *end_page      = (void *) (((uint64_t)(addr) + size) & ~0xFFF);
