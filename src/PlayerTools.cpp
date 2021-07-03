@@ -1,7 +1,8 @@
 /*
   Created on 23.06.18.
   
-  edit by POggers to sync with upstream to stop crashes due to Signatures??
+  edited by poggers (fix injection crash?)
+  fork by cyrex
 */
 
 #include "common.hpp"
@@ -29,18 +30,18 @@ static CatCommand forgive_all("pt_forgive_all", "Clear betrayal list", []() { be
 
 bool shouldTargetSteamId(unsigned id)
 {
-    // We don't need betryal thing - Human players can freely kill us.
-
+	// no need for betrayal limit lol
+	
     auto &pl = playerlist::AccessData(id);
-    
-	if (pl.state == playerlist::k_EState::FRIEND) {
+	
+    if (pl.state == playerlist::k_EState::FRIEND) {
 		return false;
 	}
 	
 	if (pl.state != playerlist::k_EState::CAT) {
 	    return false;
     }
-		
+	
     return true;
 }
 
@@ -48,14 +49,19 @@ bool shouldTarget(CachedEntity *entity)
 {
     if (entity->m_Type() == ENTITY_PLAYER)
     {
-       if (!shouldTargetSteamId(entity->player_info.friendsID))
+        if (!shouldTargetSteamId(entity->player_info.friendsID))
 	    return false;
 	return true;
     }
     else if (entity->m_Type() == ENTITY_BUILDING)
-        // Don't shoot buildings at all
+    {
+	    return false;
+    }
+        
+	// Don't shoot buildings at all
     return false;
 }
+
 bool shouldAlwaysRenderEspSteamId(unsigned id)
 {
     if (id == 0)
