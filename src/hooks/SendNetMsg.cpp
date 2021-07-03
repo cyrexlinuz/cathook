@@ -1,8 +1,6 @@
 /*
   Created by Jenny White on 29.04.18.
   Copyright (c) 2018 nullworks. All rights reserved.
-  
-  Last edit by Cyrexlinuz
 */
 
 #include <MiscTemporary.hpp>
@@ -14,8 +12,6 @@
 #include "e8call.hpp"
 #include "Warp.hpp"
 #include "nospread.hpp"
-#include <sstream>
-#include <fstream>
 
 static settings::Int newlines_msg{ "chat.prefix-newlines", "0" };
 static settings::Boolean log_sent{ "debug.log-sent-chat", "false" };
@@ -76,9 +72,6 @@ void ProcessSendline(IGameEvent *kv)
     float message_type = kv->GetFloat("y");
     auto panel_type    = kv->GetInt("panel");
     auto line_type     = kv->GetInt("line");
-  
-    std::ostringstream bsteamid;
-	  std::ofstream logfilez;
 
     // Verify all the data matches
     if (player_idx != 0xDEAD && panel_type == 2 && line_type == 0 && message_type == AUTH_MESSAGE && (id == CAT_IDENTIFY || id == CAT_REPLY))
@@ -90,14 +83,8 @@ void ProcessSendline(IGameEvent *kv)
         // CA8 = Change state
         if (id == CAT_IDENTIFY && *answerIdentify && player_idx != g_pLocalPlayer->entity_idx && playerlist::AccessData(info.friendsID).state != playerlist::k_EState::RAGE)
             send_drawline_reply = true;
-        if (playerlist::ChangeState(info.friendsID, playerlist::k_EState::CAT) && playerlist::AccessData(info.friendsID).state != playerlist::k_EState::IPC) {
+        if (playerlist::ChangeState(info.friendsID, playerlist::k_EState::CAT))
             PrintChat("\x07%06X%s\x01 Marked as CAT (Cathook user)", 0xe05938, info.name);
-			
-			      // Log the Steam ID ?
-			      bsteamid << "[U:1:" << info.friendsID << "]" << " - " << info.name << std::endl;
-			      logfilez.open("/home/host/steamids.txt", std::ios_base::app);
-			      logfilez << bsteamid.str(); 
-		    }
     }
 }
 
