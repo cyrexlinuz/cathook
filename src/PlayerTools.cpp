@@ -1,6 +1,5 @@
 /*
   Created on 23.06.18.
-  
   edited by poggers (fix injection crash?)
   fork by cyrex
 */
@@ -30,12 +29,16 @@ static CatCommand forgive_all("pt_forgive_all", "Clear betrayal list", []() { be
 
 bool shouldTargetSteamId(unsigned id)
 {
-  // no betrayal limit
+    if (betrayal_limit)
+    {
+        if (betrayal_list[id] > (unsigned) *betrayal_limit)
+            return true;
+    }
 
     auto &pl = playerlist::AccessData(id);
-    if (pl.state == playerlist::k_EState::CAT)
-        return true;
-    return false;
+    if (playerlist::IsFriendly(pl.state) || (pl.state == playerlist::k_EState::CAT && *ignoreCathook))
+        return false;
+    return true;
 }
 
 bool shouldTarget(CachedEntity *entity)
@@ -54,8 +57,8 @@ bool shouldTarget(CachedEntity *entity)
         return shouldTargetSteamId(entity->player_info.friendsID);
     }
     else if (entity->m_Type() == ENTITY_BUILDING)
-        // Don't shoot buildings at all
-        if (!isTruce() || isTruce())
+        // Don't shoot buildings in truce
+        if (isTruce())
             return false;
 
     return true;
