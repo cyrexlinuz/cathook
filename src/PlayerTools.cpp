@@ -27,11 +27,7 @@ static CatCommand forgive_all("pt_forgive_all", "Clear betrayal list", []() { be
 
 bool shouldTargetSteamId(unsigned id)
 {
-    if (betrayal_limit)
-    {
-        if (betrayal_list[id] > (unsigned) *betrayal_limit)
-            return true;
-    }
+    // no betrayal limit, humans can kill us
 
     auto &pl = playerlist::AccessData(id);
     if (playerlist::IsFriendly(pl.state) || (pl.state == playerlist::k_EState::CAT && *ignoreCathook))
