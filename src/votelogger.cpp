@@ -52,10 +52,6 @@ static void vote_rage_back()
         if (!g_IEngine->GetPlayerInfo(ent->m_IDX, &info))
             continue;
 
-		// tbh i have no idea what i am doing, new to messing with C++ shit.
-		// replaced RAGE with CAT (bots)
-		// no idea what that will cause LOL
-		
         auto &pl = playerlist::AccessData(info.friendsID);
         if (pl.state == playerlist::k_EState::CAT)
             targets.emplace_back(info.userID);
@@ -139,17 +135,6 @@ void dispatchUserMessage(bf_read &buffer, int type)
             if (chat_partysay)
                 re::CTFPartyClient::GTFPartyClient()->SendPartyChat(formated_string);
         }
-		if (was_local_player) {
-		using namespace playerlist;
-		// Only abandon if the person trying to kick us isn't a bot/cheater
-            	auto &pl_caller      = AccessData(info2.friendsID);
-            	bool friendly_caller = pl_caller.state != k_EState::CAT;
-		
-		if(friendly_caller) {
-			// Abandon if someone calls a votekick no matter it passes or not.
-			tfmm::disconnectAndAbandon();
-		}
-	}
 #if ENABLE_VISUALS
         if (chat)
             PrintChat("Votekick called: \x07%06X%s\x01 => \x07%06X%s\x01 (%s)", colors::chat::team(g_pPlayerResource->getTeam(caller)), info2.name, colors::chat::team(g_pPlayerResource->getTeam(target)), info.name, reason);
