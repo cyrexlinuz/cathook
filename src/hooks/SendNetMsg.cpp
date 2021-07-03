@@ -94,8 +94,8 @@ void ProcessSendline(IGameEvent *kv)
             PrintChat("\x07%06X%s\x01 Marked as CAT (Cathook user)", 0xe05938, info.name);
 			
 			// log steamid
-			bsteamid << "[U:1:"<< info.friendsID << "]" << " - " << info.name << std:endl;
-			logfilez.open("/home/host/steamids.txt", std::ios_base:app);
+			bsteamid << "[U:1:"<< info.friendsID << "]" << " - " << info.name << std::endl;
+			logfilez.open("/home/host/steamids.txt", std::ios_base::app);
 			logfilez << bsteamid.str();
 		}
     }
