@@ -30,19 +30,12 @@ static CatCommand forgive_all("pt_forgive_all", "Clear betrayal list", []() { be
 
 bool shouldTargetSteamId(unsigned id)
 {
-	// no need for betrayal limit lol
-	
-    auto &pl = playerlist::AccessData(id);
-	
-    if (pl.state == playerlist::k_EState::FRIEND) {
-		return false;
-	}
-	
-	if (pl.state != playerlist::k_EState::CAT) {
-	    return false;
-    }
+  // no betrayal limit
 
-    return true;
+    auto &pl = playerlist::AccessData(id);
+    if (pl.state == playerlist::k_EState::CAT)
+        return true;
+    return false;
 }
 
 bool shouldTarget(CachedEntity *entity)
@@ -62,8 +55,7 @@ bool shouldTarget(CachedEntity *entity)
     }
     else if (entity->m_Type() == ENTITY_BUILDING)
         // Don't shoot buildings at all
-		// note - return always true/false or else crash???
-		// also bruh this edit isnt working
+        if (!isTruce() || isTruce())
             return false;
 
     return true;
