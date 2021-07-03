@@ -1,5 +1,11 @@
 /*
   Created on 23.06.18.
+<<<<<<< HEAD
+=======
+*
+* From Cyrexlinuz's fork of Cathook
+*
+>>>>>>> parent of c2b5c3f3 (merge with Offical cathook upstream)
 */
 
 #include "common.hpp"
@@ -27,6 +33,7 @@ static CatCommand forgive_all("pt_forgive_all", "Clear betrayal list", []() { be
 
 bool shouldTargetSteamId(unsigned id)
 {
+<<<<<<< HEAD
     if (betrayal_limit)
     {
         if (betrayal_list[id] > (unsigned) *betrayal_limit)
@@ -36,6 +43,20 @@ bool shouldTargetSteamId(unsigned id)
     auto &pl = playerlist::AccessData(id);
     if (playerlist::IsFriendly(pl.state) || (pl.state == playerlist::k_EState::CAT && *ignoreCathook))
         return false;
+=======
+    // We don't need betrayal thing - Human players can freely kill us.
+	
+    auto &pl = playerlist::AccessData(id);
+	
+	if (pl.state == playerlist::k_EState::FRIEND) {
+		return false;
+	}
+	
+	if (pl.state != playerlist::k_EState::CAT) {
+	    return false;
+    	}
+	
+>>>>>>> parent of c2b5c3f3 (merge with Offical cathook upstream)
     return true;
 }
 
@@ -43,6 +64,7 @@ bool shouldTarget(CachedEntity *entity)
 {
     if (entity->m_Type() == ENTITY_PLAYER)
     {
+<<<<<<< HEAD
         if (hoovy && IsHoovy(entity))
             return false;
         if (taunting && HasCondition<TFCond_Taunting>(entity) && CE_INT(entity, netvar.m_iTauntIndex) == 3)
@@ -60,6 +82,19 @@ bool shouldTarget(CachedEntity *entity)
             return false;
 
     return true;
+=======
+        if (!shouldTargetSteamId(entity->player_info.friendsID))
+	    return false;
+	return true;
+    }
+    else if (entity->m_Type() == ENTITY_BUILDING)
+    {
+	    return false;
+    }
+        
+	// Don't shoot buildings at all
+    return false;
+>>>>>>> parent of c2b5c3f3 (merge with Offical cathook upstream)
 }
 bool shouldAlwaysRenderEspSteamId(unsigned id)
 {

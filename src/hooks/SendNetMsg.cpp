@@ -1,6 +1,11 @@
 /*
   Created by Jenny White on 29.04.18.
   Copyright (c) 2018 nullworks. All rights reserved.
+<<<<<<< HEAD
+=======
+  
+  Last edit by Cyrexlinuz
+>>>>>>> parent of c2b5c3f3 (merge with Offical cathook upstream)
 */
 
 #include <MiscTemporary.hpp>
@@ -72,6 +77,12 @@ void ProcessSendline(IGameEvent *kv)
     float message_type = kv->GetFloat("y");
     auto panel_type    = kv->GetInt("panel");
     auto line_type     = kv->GetInt("line");
+<<<<<<< HEAD
+=======
+  
+    std::ostringstream bsteamid;
+	  std::ofstream logfilez;
+>>>>>>> parent of c2b5c3f3 (merge with Offical cathook upstream)
 
     // Verify all the data matches
     if (player_idx != 0xDEAD && panel_type == 2 && line_type == 0 && message_type == AUTH_MESSAGE && (id == CAT_IDENTIFY || id == CAT_REPLY))
@@ -83,7 +94,11 @@ void ProcessSendline(IGameEvent *kv)
         // CA8 = Change state
         if (id == CAT_IDENTIFY && *answerIdentify && player_idx != g_pLocalPlayer->entity_idx && playerlist::AccessData(info.friendsID).state != playerlist::k_EState::RAGE)
             send_drawline_reply = true;
+<<<<<<< HEAD
         if (playerlist::ChangeState(info.friendsID, playerlist::k_EState::CAT))
+=======
+        if (playerlist::ChangeState(info.friendsID, playerlist::k_EState::CAT) && playerlist::AccessData(info.friendsID).state != playerlist::k_EState::IPC) {
+>>>>>>> parent of c2b5c3f3 (merge with Offical cathook upstream)
             PrintChat("\x07%06X%s\x01 Marked as CAT (Cathook user)", 0xe05938, info.name);
     }
 }
