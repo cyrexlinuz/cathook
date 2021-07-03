@@ -53,10 +53,12 @@ static void vote_rage_back()
             continue;
 
 		// tbh i have no idea what i am doing, new to messing with C++ shit.
+		// replaced RAGE with CAT (bots)
+		// no idea what that will cause LOL
 		
-        //auto &pl = playerlist::AccessData(info.friendsID);
-        //if (pl.state == playerlist::k_EState::RAGE)
-        //    targets.emplace_back(info.userID);
+        auto &pl = playerlist::AccessData(info.friendsID);
+        if (pl.state == playerlist::k_EState::CAT)
+            targets.emplace_back(info.userID);
     }
     if (targets.empty())
         return;
