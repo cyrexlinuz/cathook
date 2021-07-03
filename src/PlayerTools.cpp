@@ -30,9 +30,10 @@ bool shouldTargetSteamId(unsigned id)
     // no betrayal limit, humans can kill us
 
     auto &pl = playerlist::AccessData(id);
-    if (playerlist::IsFriendly(pl.state) || (pl.state == playerlist::k_EState::CAT && *ignoreCathook))
-        return false;
-    return true;
+    // kill bots
+	if (pl.state == playerlist::k_EState::CAT)
+        return true;
+    return false;
 }
 
 bool shouldTarget(CachedEntity *entity)
@@ -51,8 +52,8 @@ bool shouldTarget(CachedEntity *entity)
         return shouldTargetSteamId(entity->player_info.friendsID);
     }
     else if (entity->m_Type() == ENTITY_BUILDING)
-        // Don't shoot buildings in truce
-        if (isTruce())
+        // Don't shoot buildings at all 
+        if (isTruce() || !isTruce())
             return false;
 
     return true;
