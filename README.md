@@ -51,7 +51,7 @@ cd cathook
 
 scripts/developer (First y and then n)
 
-./install-all (If it asks for auto updater, you can set it to No for now)
+./update (If it asks for auto updater, SET IT TO NO.)
 
 When installation completes, you can start the TF2 first and then run:
 
@@ -62,7 +62,7 @@ If you have any questions, you can always contact me from Telegram: @cyrexlinuz
 
 ## Reporting Issues
 
-If some things doesn't work as expected, please open issues on GitHub using [this page](https://cathook.club/issues).
+If some things doesn't work as expected, please open issues on GitHub here.
 
 ## Contributing
 
