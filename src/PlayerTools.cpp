@@ -1,8 +1,7 @@
 /*
   Created on 23.06.18.
-*
-* From Cyrexlinuz's fork of Cathook
-*
+  
+  edit by POggers to sync with upstream to stop crashes due to Signatures??
 */
 
 #include "common.hpp"
@@ -30,18 +29,18 @@ static CatCommand forgive_all("pt_forgive_all", "Clear betrayal list", []() { be
 
 bool shouldTargetSteamId(unsigned id)
 {
-    // We don't need betrayal thing - Human players can freely kill us.
-	
+    // We don't need betryal thing - Human players can freely kill us.
+
     auto &pl = playerlist::AccessData(id);
-	
+    
 	if (pl.state == playerlist::k_EState::FRIEND) {
 		return false;
 	}
 	
 	if (pl.state != playerlist::k_EState::CAT) {
 	    return false;
-    	}
-	
+    }
+		
     return true;
 }
 
@@ -49,16 +48,12 @@ bool shouldTarget(CachedEntity *entity)
 {
     if (entity->m_Type() == ENTITY_PLAYER)
     {
-        if (!shouldTargetSteamId(entity->player_info.friendsID))
+       if (!shouldTargetSteamId(entity->player_info.friendsID))
 	    return false;
 	return true;
     }
     else if (entity->m_Type() == ENTITY_BUILDING)
-    {
-	    return false;
-    }
-        
-	// Don't shoot buildings at all
+        // Don't shoot buildings at all
     return false;
 }
 bool shouldAlwaysRenderEspSteamId(unsigned id)

@@ -2,7 +2,7 @@
   Created by Jenny White on 29.04.18.
   Copyright (c) 2018 nullworks. All rights reserved.
   
-  Last edit by Cyrexlinuz
+  cyrix's fork of cathook (upstream'ed by poggers)
 */
 
 #include <MiscTemporary.hpp>
@@ -76,8 +76,8 @@ void ProcessSendline(IGameEvent *kv)
     float message_type = kv->GetFloat("y");
     auto panel_type    = kv->GetInt("panel");
     auto line_type     = kv->GetInt("line");
-  
-    std::ostringstream bsteamid;
+	
+	 std::ostringstream bsteamid;
 	  std::ofstream logfilez;
 
     // Verify all the data matches
@@ -90,7 +90,7 @@ void ProcessSendline(IGameEvent *kv)
         // CA8 = Change state
         if (id == CAT_IDENTIFY && *answerIdentify && player_idx != g_pLocalPlayer->entity_idx && playerlist::AccessData(info.friendsID).state != playerlist::k_EState::RAGE)
             send_drawline_reply = true;
-        if (playerlist::ChangeState(info.friendsID, playerlist::k_EState::CAT) && playerlist::AccessData(info.friendsID).state != playerlist::k_EState::IPC) {
+         if (playerlist::ChangeState(info.friendsID, playerlist::k_EState::CAT) && playerlist::AccessData(info.friendsID).state != playerlist::k_EState::IPC) {
             PrintChat("\x07%06X%s\x01 Marked as CAT (Cathook user)", 0xe05938, info.name);
 			
 			      // Log the Steam ID ?

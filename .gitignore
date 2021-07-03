@@ -292,3 +292,4 @@ scripts/updater-preferences
 
 # clangd
 .cache
+README.md
