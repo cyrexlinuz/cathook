@@ -41,7 +41,7 @@ bool shouldTargetSteamId(unsigned id)
 	if (pl.state != playerlist::k_EState::CAT) {
 	    return false;
     }
-	
+
     return true;
 }
 
@@ -49,19 +49,25 @@ bool shouldTarget(CachedEntity *entity)
 {
     if (entity->m_Type() == ENTITY_PLAYER)
     {
-        if (!shouldTargetSteamId(entity->player_info.friendsID))
-	    return false;
-	return true;
+        if (hoovy && IsHoovy(entity))
+            return false;
+        if (taunting && HasCondition<TFCond_Taunting>(entity) && CE_INT(entity, netvar.m_iTauntIndex) == 3)
+            return false;
+        if (HasCondition<TFCond_HalloweenGhostMode>(entity))
+            return false;
+        // Don't shoot players in truce
+        if (isTruce())
+            return false;
+        return shouldTargetSteamId(entity->player_info.friendsID);
     }
     else if (entity->m_Type() == ENTITY_BUILDING)
-    {
-	    return false;
-    }
-        
-	// Don't shoot buildings at all
-    return false;
-}
+        // Don't shoot buildings at all
+		// note - return always true/false or else crash???
+		// also bruh this edit isnt working
+            return false;
 
+    return true;
+}
 bool shouldAlwaysRenderEspSteamId(unsigned id)
 {
     if (id == 0)
