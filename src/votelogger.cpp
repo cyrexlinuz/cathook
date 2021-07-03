@@ -119,7 +119,7 @@ void dispatchUserMessage(bf_read &buffer, int type)
             {
                 vote_command = { "vote option2", 1000u + (rand() % 5000) };
                 vote_command.timer.update();
-                if (*vote_rage_vote && !friendly_caller)
+               // if (*vote_rage_vote && !friendly_caller)
                     //pl_caller.state = k_EState::RAGE; no rage
             }
             else if (*vote_kicky && !friendly_kicked)
