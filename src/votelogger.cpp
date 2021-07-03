@@ -3,10 +3,6 @@
  *
  *  Created on: Dec 31, 2017
  *      Author: nullifiedcat
- *
- *
- *		From Cyrex's Cathook fork (upstream'ed and fixed by Poggers)
- *
  */
 
 #include "common.hpp"
@@ -53,7 +49,7 @@ static void vote_rage_back()
             continue;
 
         auto &pl = playerlist::AccessData(info.friendsID);
-        if (pl.state == playerlist::k_EState::CAT)
+        if (pl.state == playerlist::k_EState::RAGE)
             targets.emplace_back(info.userID);
     }
     if (targets.empty())
@@ -112,15 +108,15 @@ void dispatchUserMessage(bf_read &buffer, int type)
 
             auto &pl             = AccessData(info.friendsID);
             auto &pl_caller      = AccessData(info2.friendsID);
-            bool friendly_kicked = pl.state != k_EState::CAT;
-            bool friendly_caller = pl_caller.state != k_EState::CAT;
+            bool friendly_kicked = pl.state != k_EState::RAGE && pl.state != k_EState::DEFAULT;
+            bool friendly_caller = pl_caller.state != k_EState::RAGE && pl_caller.state != k_EState::DEFAULT;
 
             if (*vote_kickn && friendly_kicked)
             {
                 vote_command = { "vote option2", 1000u + (rand() % 5000) };
                 vote_command.timer.update();
-               // if (*vote_rage_vote && !friendly_caller)
-                    //pl_caller.state = k_EState::RAGE; no rage
+                if (*vote_rage_vote && !friendly_caller)
+                    pl_caller.state = k_EState::RAGE;
             }
             else if (*vote_kicky && !friendly_kicked)
             {

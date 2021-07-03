@@ -1,7 +1,5 @@
 /*
   Created on 23.06.18.
-  edited by poggers (fix injection crash?)
-  fork by cyrex
 */
 
 #include "common.hpp"
