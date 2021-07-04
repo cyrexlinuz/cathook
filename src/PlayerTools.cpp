@@ -1,8 +1,5 @@
 /*
   Created on 23.06.18.
-*
-* From Cyrexlinuz's fork of Cathook
-*
 */
 
 #include "common.hpp"
@@ -30,36 +27,36 @@ static CatCommand forgive_all("pt_forgive_all", "Clear betrayal list", []() { be
 
 bool shouldTargetSteamId(unsigned id)
 {
-    // We don't need betrayal thing - Human players can freely kill us.
-	
+    // no betrayal limit, humans can kill us
+
     auto &pl = playerlist::AccessData(id);
-	
-	if (pl.state == playerlist::k_EState::FRIEND) {
-		return false;
-	}
-	
-	if (pl.state != playerlist::k_EState::CAT) {
-	    return false;
-    	}
-	
-    return true;
+    // kill bots
+	if (pl.state == playerlist::k_EState::CAT)
+        return true;
+    return false;
 }
 
 bool shouldTarget(CachedEntity *entity)
 {
     if (entity->m_Type() == ENTITY_PLAYER)
     {
-        if (!shouldTargetSteamId(entity->player_info.friendsID))
-	    return false;
-	return true;
+        if (hoovy && IsHoovy(entity))
+            return false;
+        if (taunting && HasCondition<TFCond_Taunting>(entity) && CE_INT(entity, netvar.m_iTauntIndex) == 3)
+            return false;
+        if (HasCondition<TFCond_HalloweenGhostMode>(entity))
+            return false;
+        // Don't shoot players in truce
+        if (isTruce())
+            return false;
+        return shouldTargetSteamId(entity->player_info.friendsID);
     }
     else if (entity->m_Type() == ENTITY_BUILDING)
-    {
-	    return false;
-    }
-        
-	// Don't shoot buildings at all
-    return false;
+        // Don't shoot buildings at all 
+        if (isTruce() || !isTruce())
+            return false;
+
+    return true;
 }
 bool shouldAlwaysRenderEspSteamId(unsigned id)
 {
